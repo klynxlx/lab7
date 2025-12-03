@@ -73,7 +73,7 @@ const images = [
     const originalImageSrc = event.target.dataset.source;
   
     const instance = basicLightbox.create(`
-      <img src="${originalImageSrc}" width="800" height="600">
+      <img src="${originalImageSrc}" width="1600" height="1400">
     `);
   
     instance.show();
