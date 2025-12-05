@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Countdown Timer</title>
 
   <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   <!-- iziToast CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 40px;
-      background: #f0f0f0;
+      padding: 20px;
+      font-size: 18px;
     }
-    input, button {
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-    }
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+
     .timer {
       display: flex;
       gap: 20px;
       margin-top: 20px;
+      font-size: 24px;
     }
+
     .field {
-      background: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     .value {
       font-size: 32px;
-      display: block;
+      font-weight: bold;
     }
-    .label {
-      font-size: 14px;
-      color: #555;
+
+    button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   </style>
 </head>
+
 <body>
 
-  <input type="date" id="datetime-picker" placeholder="Select date and time" />
+  <input type="text" id="datetime-picker" placeholder="Select date & time" />
   <button type="button" data-start disabled>Start</button>
 
   <div class="timer">
@@ -70,8 +67,14 @@
     </div>
   </div>
 
-  <!-- ТІЛЬКИ наш JS -->
-  <script type="module" src="1-timer.js"></script>
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- iziToast JS -->
+  <script src="https://cdn.jsdelivr.net/npm/izitoast"></script>
+
+  <!-- Main JS -->
+  <script src="js/1-timer.js" defer></script>
 
 </body>
 </html>

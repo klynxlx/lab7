@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Search Gallery</title>
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
+
+
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    form { margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; }
+    input[type="text"] { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; background-color: #4a6cf7; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background-color: #3b53d1; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+    .photo-card { background: white; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .photo-card img { width: 100%; display: block; }
+    .info { display: flex; justify-content: space-around; padding: 10px; font-size: 0.9em; color: #555; }
+    .loader { display: none; text-align: center; margin: 20px 0; }
+    .loader div { width: 40px; height: 40px; border: 5px solid #ccc; border-top-color: #4a6cf7; border-radius: 50%; animation: spin 1s linear infinite; margin: auto; }
+    @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+  </style>
+</head>
+<body>
+
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Search images..." />
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="loader" id="loader"><div></div></div>
+
+  <div class="gallery" id="gallery"></div>
+
+
+<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
+
+  <script>
+    const API_KEY = '53563463-a4966c8f4fa6e0509bcca5cd9'; // встав свій ключ
+    const form = document.getElementById('search-form');
+    const input = document.getElementById('search-input');
+    const gallery = document.getElementById('gallery');
+    const loader = document.getElementById('loader');
+    let lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = input.value.trim();
+      if (!query) {
+        iziToast.warning({ title: 'Warning', message: 'Please enter a search query!' });
+        return;
+      }
+      gallery.innerHTML = '';
+      loader.style.display = 'block';
+
+      fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&orientation=horizontal&safesearch=true`)
+        .then(res => res.json())
+        .then(data => {
+          loader.style.display = 'none';
+          if (!data.hits || data.hits.length === 0) {
+            iziToast.error({ title: 'Oops!', message: 'Sorry, there are no images matching your search query. Please try again!' });
+            return;
+          }
+          const cards = data.hits.map(hit => `
+            <a href="${hit.largeImageURL}">
+              <div class="photo-card">
+                <img src="${hit.webformatURL}" alt="${hit.tags}" loading="lazy"/>
+                <div class="info">
+                  <span>Likes: ${hit.likes}</span>
+                  <span>Views: ${hit.views}</span>
+                  <span>Comments: ${hit.comments}</span>
+                  <span>Downloads: ${hit.downloads}</span>
+                </div>
+              </div>
+            </a>
+          `).join('');
+          gallery.innerHTML = cards;
+          lightbox.refresh();
+        })
+        .catch(err => {
+          loader.style.display = 'none';
+          iziToast.error({ title: 'Error', message: 'Something went wrong. Please try again later.' });
+          console.error(err);
+        });
+    });
+  </script>
+
+</body>
+</html>
