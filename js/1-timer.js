@@ -34,27 +34,34 @@ function convertMs(ms) {
 }
 
 // Ініціалізація flatpickr
-flatpickr(input, {
-  enableTime: true,
-  time_24hr: true,
+flatpickr("#datetime-picker"), {
+  enableTime: false, // тільки дата
+  dateFormat: "Y-m-d", // формат дати
   defaultDate: new Date(),
-  minuteIncrement: 1,
   onClose(selectedDates) {
-    const selected = selectedDates[0];
+    if (!selectedDates[0]) return;
 
-    if (selected <= new Date()) {
-      startBtn.disabled = true;
-      iziToast.error({
-        title: 'Error',
-        message: 'Please choose a date in the future',
-        position: 'topRight',
-      });
-    } else {
-      userSelectedDate = selected;
-      startBtn.disabled = false;
-    }
-  }
-});
+    // Встановлюємо час на 00:00
+    const selected = new Date(selectedDates[0]);
+    selected.setHours(0, 0, 0, 0);
+
+    // Перевірка, що дата в майбутньому (чи сьогодні)
+  const today = new Date();
+today.setHours(0,0,0,0); // початок сьогоднішнього дня
+
+if (selected.getTime() < today.getTime()) {
+  startBtn.disabled = true;
+  iziToast.error({
+    title: 'Error',
+    message: 'Please choose today or a future date',
+    position: 'topRight',
+  });
+} else {
+  userSelectedDate = selected;
+  startBtn.disabled = false;
+}
+
+  }}
 
 // Запуск таймера
 startBtn.addEventListener('click', () => {
