@@ -1,4 +1,4 @@
-/* Загальні стилі для сторінки */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -10,7 +10,7 @@ body {
     height: 100vh;
   }
   
-  /* Стилі для форми */
+
   .feedback-form {
     background-color: #fff;
     padding: 20px;
@@ -19,7 +19,7 @@ body {
     width: 300px;
   }
   
-  /* Стилі для міток */
+ 
   .feedback-form label {
     display: block;
     margin-bottom: 10px;
@@ -28,7 +28,7 @@ body {
     font-weight: bold;
   }
   
-  /* Стилі для полів вводу */
+ 
   .feedback-form input,
   .feedback-form textarea {
     width: 100%;
@@ -47,7 +47,7 @@ body {
     outline: none;
   }
   
-  /* Стилі для кнопки */
+
   .feedback-form button {
     background-color: #9958e4;
     color: #fff;

@@ -24,48 +24,48 @@ h1 {
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* відступи між зображеннями */
+    gap: 20px; 
     justify-content: center;
-    list-style: none; /* видаляє маркери списку */
+    list-style: none; 
     padding: 0;
     margin: 0;
   }
   
   .gallery__item {
-    flex: 0 1 calc(33.333% - 20px); /* Задає ширину для кожного зображення */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тінь для картки */
+    flex: 0 1 calc(33.333% - 20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     border-radius: 8px;
-    overflow: hidden; /* Обрізає зайві частини */
+    overflow: hidden;
   }
   
   .gallery__image {
     display: block;
-    width: 100%; /* Заповнює ширину контейнера */
-    height: 100%; /* Заповнює висоту контейнера */
-    object-fit: cover; /* Масштабує зображення без спотворення */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease-in-out;
   }
   
   .gallery__image:hover {
-    transform: scale(1.05); /* Анімація при наведенні */
+    transform: scale(1.05);
   }
   .feedback-button {
-    position: fixed; /* Фіксована позиція */
-    top: 20px; /* Відступ зверху */
-    right: 20px; /* Відступ справа */
-    background-color: #ff5722; /* Колір фону */
-    color: #fff; /* Колір тексту */
-    text-decoration: none; /* Видаляє підкреслення */
-    font-size: 16px; /* Розмір шрифту */
-    font-weight: bold; /* Товстий шрифт */
-    padding: 10px 20px; /* Внутрішні відступи */
-    border-radius: 5px; /* Закруглені кути */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тінь кнопки */
+    position: fixed;
+    top: 20px; 
+    right: 20px;
+    background-color: #ff5722;
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 16px; 
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     transition: background-color 0.3s ease-in-out;
-    z-index: 1000; /* Щоб кнопка була поверх інших елементів */
+    z-index: 1000; 
   }
   
   .feedback-button:hover {
-    background-color: #9e310f; /* Темніший колір при наведенні */
+    background-color: #9e310f; 
   }
   
